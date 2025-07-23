@@ -1,34 +1,27 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import AOSWrapper from '@/components/AOSWrapper' // ← o componente que criamos
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Portfólio de Paulo',
-  description: 'Especialista em tráfego pago, IA e estratégias digitais',
-}
+  title: "Sintonia Solutions - Aulas de Tráfego", // ou o título que preferir
+  description: "Transforme cliques em vendas com aulas de Tráfego Pago e IA",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AOSWrapper />
+      {/* A MUDANÇA É AQUI!
+        Adicionamos 'bg-gray-950' para um fundo quase preto e 'text-white' como cor padrão do texto.
+      */}
+      <body className={`${inter.className} bg-gray-950 text-white`}>
         {children}
       </body>
     </html>
-  )
+  );
 }
