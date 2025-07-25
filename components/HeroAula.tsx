@@ -1,14 +1,47 @@
 import Image from "next/image";
 import FormAgendamento from "./FormAgendamento";
-import { CheckCircleIcon, LightBulbIcon, ChatBubbleBottomCenterTextIcon, CpuChipIcon, RocketLaunchIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, LightBulbIcon, ChatBubbleBottomCenterTextIcon, CpuChipIcon, RocketLaunchIcon, AdjustmentsHorizontalIcon, ChartBarIcon, PresentationChartLineIcon, SparklesIcon, UserGroupIcon  } from '@heroicons/react/24/solid';
 
 // --- DADOS DE TODAS AS SEÇÕES ---
 
+const roteiroAulas = [
+  {
+    icon: <AdjustmentsHorizontalIcon className="h-8 w-8 text-blue-400" />,
+    title: "Estrutura e Configuração",
+    description: "Configuramos sua conta de anúncios do zero, da forma correta, evitando bloqueios e problemas futuros.",
+  },
+  {
+    icon: <PresentationChartLineIcon className="h-8 w-8 text-blue-400" />,
+    title: "Objetivos de Campanha",
+    description: "Você vai entender qual objetivo usar para cada momento do seu funil, seja para atrair, engajar ou vender.",
+  },
+  {
+    icon: <SparklesIcon className="h-8 w-8 text-blue-400" />,
+    title: "Criação de Criativos",
+    description: "Aprendemos a estruturar e testar imagens e vídeos que realmente chamam a atenção e convertem.",
+  },
+  {
+    icon: <UserGroupIcon className="h-8 w-8 text-blue-400" />,
+    title: "Públicos e Segmentação",
+    description: "Vamos encontrar seus clientes ideais, testando públicos de interesses, semelhantes (lookalike) e remarketing.",
+  },
+  {
+    icon: <ChartBarIcon className="h-8 w-8 text-blue-400" />,
+    title: "Análise e Otimização",
+    description: "Você aprenderá a ler as métricas que importam para tomar decisões inteligentes e otimizar seus orçamentos.",
+  },
+  {
+    icon: <RocketLaunchIcon className="h-8 w-8 text-blue-400" />,
+    title: "Estratégias de Escala",
+    description: "Quando os resultados aparecerem, vou te mostrar como escalar suas campanhas de forma segura para vender ainda mais.",
+  },
+];
+
 const diferenciais = [
-  { icon: <LightBulbIcon className="h-8 w-8 text-blue-400 mb-4" />, title: "Diagnóstico Personalizado", description: "Cada aula começa entendendo sua realidade e onde está o gargalo. Nada genérico, é direto no que vai te destravar." },
-  { icon: <RocketLaunchIcon className="h-8 w-8 text-blue-400 mb-4" />, title: "Aplicação Imediata", description: "Você sai da aula com estratégias práticas e já aplicáveis, mesmo que nunca tenha anunciado nada." },
-  { icon: <CpuChipIcon className="h-8 w-8 text-blue-400 mb-4" />, title: "Inteligência Artificial ao seu favor", description: "Uso real e simplificado de IA pra acelerar seus anúncios, criativos e estrutura de campanha." },
-  { icon: <ChatBubbleBottomCenterTextIcon className="h-8 w-8 text-blue-400 mb-4" />, title: "Suporte direto e humanizado", description: "Nada de chatbot. Você fala direto com quem vai te ensinar — com empatia e foco no resultado." },
+  { icon: <LightBulbIcon className="h-8 w-8 text-lime-400 mb-4" />, title: "Diagnóstico Personalizado", description: "Cada aula começa entendendo sua realidade e onde está o gargalo. Nada genérico, é direto no que vai te destravar." },
+  { icon: <RocketLaunchIcon className="h-8 w-8 text-lime-400 mb-4" />, title: "Aplicação Imediata", description: "Você sai da aula com estratégias práticas e já aplicáveis, mesmo que nunca tenha anunciado nada." },
+  { icon: <CpuChipIcon className="h-8 w-8 text-lime-400 mb-4" />, title: "Inteligência Artificial ao seu favor", description: "Uso real e simplificado de IA pra acelerar seus anúncios, criativos e estrutura de campanha." },
+  { icon: <ChatBubbleBottomCenterTextIcon className="h-8 w-8 text-lime-400 mb-4" />, title: "Suporte direto e humanizado", description: "Nada de chatbot. Você fala direto com quem vai te ensinar — com empatia e foco no resultado." },
 ];
 
 const comoFunciona = [
@@ -35,13 +68,13 @@ export default function HeroAula() {
       <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 py-16 text-center bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3b82f633,transparent)] -z-10"></div>
         <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight mb-8 max-w-4xl animate-fadeInUp">
-          Transforme cliques em vendas com <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Tráfego Pago e Inteligência Artificial</span>
+          Transforme cliques em vendas com <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">Tráfego Pago e Inteligência Artificial</span>
         </h1>
         <p className="text-lg sm:text-2xl text-gray-300 mb-8 max-w-2xl animate-fadeInUp animation-delay-200">
           Aulas 1:1 sob medida pra você aplicar agora, direto com quem vive disso todos os dias.
         </p>
-        <a href="#agendar" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-full text-lg shadow-xl transition-all duration-300 animate-fadeInUp animation-delay-400 transform hover:scale-110 hover:shadow-blue-500/50 relative group">
-          <span className="relative z-10">🔵 Quero aprender com você</span>
+        <a href="#agendar" className="bg-green-600 hover:bg-green-500 text-white font-semibold py-4 px-10 rounded-full text-lg shadow-xl transition-all duration-300 animate-fadeInUp animation-delay-400 transform hover:scale-110 hover:shadow-green-500/50 relative group">
+          <span className="relative z-10">💡 Quero aprender com você</span>
         </a>
         <p className="text-sm text-gray-400 mt-4 animate-fadeInUp animation-delay-600">
           ⚡ Vagas limitadas por semana – atendimento individual
@@ -54,12 +87,13 @@ export default function HeroAula() {
       {/* SEÇÃO "QUEM É PAULO?" */}
       <section className="mt-32 text-center max-w-3xl mx-auto px-6">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">Quem é Paulo?</h2>
-        <p className="text-gray-400 text-lg">
+        <p className="text-gray-500 text-lg">
           Especialista em tráfego pago e IA com mais de <span className="text-white font-bold">5 anos de experiência</span> e <span className="text-white font-bold">+R$5 milhões gerenciados</span> em anúncios. Apaixonado por ensinar de forma simples e objetiva, entregando clareza e resultado desde a primeira aula.
         </p>
       </section>
 
-      {/* SEÇÃO "DIFERENCIAIS" */}
+
+       {/* SEÇÃO "DIFERENCIAIS" */}
       <section className="mt-32 max-w-5xl mx-auto px-6">
         <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
           Por que essas aulas são diferentes?
@@ -74,6 +108,35 @@ export default function HeroAula() {
           ))}
         </div>
       </section>
+
+
+<section className="mt-32 max-w-6xl mx-auto px-6">
+  <div className="text-center mb-16">
+    <h2 className="text-3xl sm:text-4xl font-bold">
+      Nosso Roteiro Para o Sucesso
+    </h2>
+    <p className="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">
+      Um passo a passo completo, cobrindo tudo que você precisa para criar campanhas lucrativas e com estratégia.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {roteiroAulas.map((topico, index) => (
+      <div key={index} className="bg-gray-900 p-8 rounded-2xl ring-1 ring-white/10 flex flex-col items-start transition-all duration-300 hover:ring-blue-500 hover:-translate-y-2">
+        {/* AQUI ESTÁ A MUDANÇA: Substituímos o número pelo ícone */}
+        <div className="bg-gray-800 p-3 rounded-lg self-start mb-6">
+          {topico.icon}
+        </div>
+        <h3 className="text-xl font-semibold text-white mb-3">{topico.title}</h3>
+        <p className="text-gray-300 text-md">
+          {topico.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+      
+
 
       {/* SEÇÃO 'VOCÊ ESTÁ NO LUGAR CERTO SE...' (DOR VS DESEJO)*/}
       <section className="mt-32 max-w-5xl mx-auto px-6">
