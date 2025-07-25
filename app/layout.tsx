@@ -32,7 +32,7 @@ export default function RootLayout({
         {/* Substitua G-XXXXXXXXXX pelo seu ID da Métrica do Google */}
         <Script 
           strategy="afterInteractive" 
-          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+          src={`https://www.googletagmanager.com/gtag/js?id=G-GYR5QWSWK2`}
         />
         <Script 
           id="google-analytics"
@@ -42,7 +42,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-G-GYR5QWSWK2');
+              gtag('config', 'G-GYR5QWSWK2');
             `,
           }}
         />
