@@ -318,21 +318,32 @@ export default function SalesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO DA OFERTA FINAL (STACK) */}
+
+  {/* SEÇÃO DA OFERTA FINAL (STACK) */}
       <section className="py-24 px-6 relative">
         <div className="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           {/* Faixa de Desconto */}
-          <div className="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-6 py-2 rounded-bl-2xl">
-            90% OFF
+          <div className="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-6 py-2 rounded-bl-2xl z-20">
+            96% OFF
           </div>
 
-          <div className="text-center mb-10">
-            <h3 className="text-2xl text-yellow-400 font-medium mb-2">Aula gravada (06/12/2025)</h3>
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-2xl text-red-500 line-through font-medium">R$ 970,00</span>
-              <span className="text-6xl font-extrabold text-white">R$ 67,00</span>
+          {/* Header da Oferta com espaçamento corrigido no mobile (pt-8) */}
+          <div className="text-center mb-10 pt-8 sm:pt-0 relative z-10">
+            <h3 className="text-2xl text-yellow-400 font-medium mb-4 sm:mb-2">Aula gravada (06/12/2025)</h3>
+            
+            {/* Bloco de Preço: Flex Column no mobile, Row no desktop */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3">
+              {/* Preço Antigo (menor no mobile) */}
+              <span className="text-xl sm:text-2xl text-red-500 line-through font-medium">
+                R$ 970,00
+              </span>
+              {/* Preço Novo (Gigante no mobile para destaque) */}
+              <span className="text-7xl sm:text-6xl font-extrabold text-white">
+                R$ 67,00
+              </span>
             </div>
-            <p className="text-gray-400 mt-2">Pagamento único. Duração: 4 horas.</p>
+            
+            <p className="text-gray-400 mt-4 sm:mt-2">Pagamento único. Duração: 4 horas.</p>
           </div>
 
           <div className="space-y-6 mb-10 text-left max-w-lg mx-auto">
@@ -365,7 +376,7 @@ export default function SalesPage() {
                   <strong className="text-white">Estratégia de Escala:</strong> O plano exato para você aumentar o orçamento com segurança.
                 </span>
               </li>
-            
+              
               <li className="flex items-center gap-3 text-yellow-400 font-bold bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20">
                 <VideoCameraIcon className="w-6 h-6 shrink-0" />
                 <span>BÔNUS: Reunião de 30 minutos com um especialista da nossa equipe (disponível por 7 dias, após a compra)</span>
@@ -379,7 +390,7 @@ export default function SalesPage() {
               className="w-full block bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl text-xl shadow-lg transition-transform transform hover:-translate-y-1 mb-4"
             >
               QUERO COMPRAR AGORA
-          </a>
+            </a>
             
             <p className="text-xs text-gray-500 mt-4">
               Garantia de 7 dias. Se não sentir que valeu a pena, devolvo seu dinheiro.
@@ -389,4 +400,4 @@ export default function SalesPage() {
       </section>
     </div>
   );
-  }
+}
