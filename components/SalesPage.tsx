@@ -1,20 +1,21 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import { 
   CheckCircleIcon, 
-  VideoCameraIcon, 
-  DevicePhoneMobileIcon, 
-  PlayCircleIcon, 
+  VideoCameraIcon,
   StarIcon,
   LockClosedIcon,
   ArrowRightIcon,
-  ChartBarIcon
+  ChartBarIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/solid';
 
 // --- DADOS DA OFERTA ---
 const oferta = {
   precoDe: "970,00",
   precoPor: "97,00",
-  linkCheckout: "https://pay.kiwify.com.br/Hz7fNnm" // Você vai colocar seu link da Kiwify/Hotmart aqui
+  linkCheckout: "https://pay.kiwify.com.br/Hz7fNnm" 
 };
 
 const modulos = [
@@ -31,7 +32,79 @@ const bonus = [
   { nome: "Sessão Tira-Dúvidas (Gravação)", valor: "R$ 197,00", status: "Incluso Hoje" },
 ];
 
+// --- LISTA DE DEPOIMENTOS (MOVIDO PARA O LUGAR CERTO) ---
+const depoimentos = [
+  // VÍDEOS
+  { 
+    nome: 'Rafael', 
+    cargo: 'Hipnoterapeuta', 
+    texto: 'A mentoria dele abriu o leque e me deu o direcionamento que faltava.', 
+    tipo: 'video', 
+    videoId: 'stDFx9zhY7A' 
+  },
+  { 
+    nome: 'Osires', 
+    cargo: 'Acupunturista', 
+    texto: 'Aprendi a anunciar do zero e gerei vendas de sessões.', 
+    tipo: 'video', 
+    videoId: '1T2ZvgThsxY' 
+  },
+  { 
+    nome: 'Tom', 
+    cargo: 'Fisioterapeuta', 
+    texto: 'Contratei agências e não tive o resultado que o Paulo me trouxe.', 
+    tipo: 'video', 
+    videoId: 'vAMwz-Ql2HE' 
+  },
+  // TEXTOS
+  { 
+    nome: 'Ronald', 
+    cargo: 'Loja de roupas', 
+    texto: 'Tinha dificuldade em estruturar campanha, o Paulo foi simples e me explicou passo a passo.', 
+    tipo: 'texto', 
+    imagemUrl: '/images/ronald.png' 
+  },
+  { 
+    nome: 'Ana Flávia', 
+    cargo: 'Vendedora', 
+    texto: 'Que paciência incrível. Me direcionou e explicou várias vezes minhas dúvidas.', 
+    tipo: 'texto', 
+    imagemUrl: '/images/anaflavia.png' 
+  },
+  { 
+    nome: 'Antônio', 
+    cargo: 'Fisioterapeuta', 
+    texto: 'Fechei meu primeiro paciente vindo dos anúncios graças às suas orientações.', 
+    tipo: 'texto', 
+    imagemUrl: '/images/antonio.png'
+  },
+  { 
+    nome: 'Flávia', 
+    cargo: 'Terapeuta', 
+    texto: 'O que é fórmula de lançamento, VTSD... todos são importantes, mas a sua aula é SENSACIONAL. Direto ao ponto!', 
+    tipo: 'texto', 
+    imagemUrl: '/images/flamaunique.png'
+  },
+
+  { 
+    nome: 'Maria José', 
+    cargo: 'Coach', 
+    texto: 'Fantástico o seu método e paciência em explicar. Simples e direto!', 
+    tipo: 'texto', 
+    imagemUrl: '/images/renova.png'
+  },
+  { 
+    nome: 'Guilherme', 
+    cargo: 'Adestrador', 
+    texto: 'Meus resultados no Google melhoraram consideravelmente em comparação com as agências que um dia contratei.', 
+    tipo: 'texto', 
+    imagemUrl: '/images/guilherme.png'
+  }
+];
+
+
 export default function SalesPage() {
+  const [mostrarDepoimentos, setMostrarDepoimentos] = useState(false);
   return (
     <div className="bg-gray-950 min-h-screen text-white font-sans selection:bg-green-500 selection:text-white">
       
@@ -58,14 +131,12 @@ export default function SalesPage() {
           Chega de gastar dinheiro à toa. Te ensino a minha estrutura de campanhas para vender qualquer produto (físico ou digital) começando com pouco investimento.
         </p>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-            <span>No vídeo abaixo, eu detalho o método que vamos aplicar, cobrindo desde a configuração da sua conta até a otimização e escala das suas campanhas. </span>
-          </div><br></br>
-
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+           <span>No vídeo abaixo, eu detalho o método que vamos aplicar, cobrindo desde a configuração da sua conta até a otimização e escala das suas campanhas. </span>
+        </div>
 
         {/* VSL / VÍDEO DE VENDAS */}
-        <div className="w-full max-w-4xl aspect-video bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 relative group overflow-hidden mb-12">
-            {/* Placeholder do Iframe do Youtube/Vimeo/PandaVideo */}
+       <div className="w-full max-w-4xl aspect-video bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 relative group overflow-hidden mb-12">
             <iframe 
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/5X1TDEdmVGg?rel=0&modestbranding=1" 
@@ -91,18 +162,18 @@ export default function SalesPage() {
         </div>
       </section>
 
+      {/* SEÇÃO PASSOS */}
       <section className="py-20 bg-gray-900 border-t border-gray-800">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">
             O passo a passo da nossa sessão:
           </h2>
-          
-          {/* Mudei de GRID para FLEX para centralizar perfeitamente 5 itens (3 em cima, 2 embaixo) */}
+        
           <div className="flex flex-wrap justify-center gap-6">
             {modulos.map((mod, i) => (
               <div key={i} className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-yellow-500/50 hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
                 
-                {/* Número Gigante de Fundo (Efeito Visual) */}
+                {/* Número Gigante de Fundo */}
                 <span className="absolute -right-4 -top-4 text-8xl font-bold text-gray-800/20 group-hover:text-yellow-900/20 transition-colors select-none">
                   {mod.numero}
                 </span>
@@ -122,7 +193,93 @@ export default function SalesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO ORDER BUMP - VISUALIZAÇÃO DO QUE PODE LEVAR A MAIS */}
+{/* SEÇÃO DE PROVA SOCIAL (DEPOIMENTOS) */}
+      <section className="py-20 bg-gray-950 relative overflow-hidden">
+        {/* Decoração de fundo */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Eles aplicaram e tiveram <span className="text-yellow-400">Resultados</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reais</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Não acredite apenas na minha palavra. Veja o que quem já passou pela mentoria tem a dizer.
+            </p>
+          </div>
+
+          {/* GRID DE VÍDEOS (SEMPRE VISÍVEL) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {depoimentos.filter(d => d.tipo === 'video').map((depo, i) => (
+              <div key={i} className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-lg hover:border-yellow-500/30 transition-all">
+                <div className="aspect-video w-full bg-black">
+                   <iframe 
+                     className="w-full h-full" 
+                     src={`https://www.youtube.com/embed/${depo.videoId}?modestbranding=1&rel=0`} 
+                     title={`Depoimento ${depo.nome}`} 
+                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                     allowFullScreen 
+                     loading="lazy"
+                   ></iframe>
+                </div>
+                <div className="p-4">
+                  <div className="flex text-yellow-400 mb-2">
+                    {[1,2,3,4,5].map(s => <StarIcon key={s} className="w-4 h-4" />)}
+                  </div>
+                  <p className="text-gray-300 text-sm italic mb-3">"{depo.texto}"</p>
+                  <p className="text-white font-bold text-sm">{depo.nome} <span className="text-gray-500 font-normal">• {depo.cargo}</span></p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* BOTÃO VEJA MAIS (SÓ APARECE SE AINDA NÃO CLICOU) */}
+          {!mostrarDepoimentos && (
+            <div className="text-center mt-8">
+              <button 
+                onClick={() => setMostrarDepoimentos(true)}
+                className="inline-flex items-center gap-2 text-yellow-400 font-semibold border border-yellow-400/30 bg-yellow-400/10 px-6 py-3 rounded-full hover:bg-yellow-400 hover:text-black transition-all duration-300 animate-bounce-slow"
+              >
+                <span>Ver mais depoimentos</span>
+                <ChevronDownIcon className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+
+          {/* GRID DE TEXTOS (SÓ APARECE DEPOIS DE CLICAR) */}
+          {mostrarDepoimentos && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-4 duration-700">
+              {depoimentos.filter(d => d.tipo === 'texto').map((depo, i) => (
+                <div key={i} className="bg-gray-900 p-6 rounded-xl border border-gray-800 relative">
+                  <div className="flex text-yellow-400 mb-3">
+                     {[1,2,3,4,5].map(s => <StarIcon key={s} className="w-4 h-4" />)}
+                  </div>
+                  <p className="text-gray-300 mb-6 relative z-10">"{depo.texto}"</p>
+                  
+                  <div className="flex items-center gap-3 mt-auto">
+                    {depo.imagemUrl ? (
+                      <div className="w-10 h-10 rounded-full overflow-hidden relative border border-gray-700">
+                        <Image src={depo.imagemUrl} alt={depo.nome} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-500 font-bold border border-gray-700">
+                        {depo.nome.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-white font-bold text-sm leading-tight">{depo.nome}</p>
+                      <p className="text-gray-500 text-xs">{depo.cargo}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+        </div>
+      </section>
+
+      {/* SEÇÃO ORDER BUMP */}
       <section className="py-20 bg-gradient-to-b from-gray-950 to-blue-950/20 relative overflow-hidden">
         {/* Elemento decorativo */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 blur-[80px] rounded-full"></div>
@@ -146,7 +303,7 @@ export default function SalesPage() {
                </div>
             </div>
 
-            {/* Simulando Visual do Order Bump 2 - Mentoria/Vitalício */}
+            {/* Simulando Visual do Order Bump 2 */}
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-dashed border-blue-500/50 flex items-start gap-4">
                <div className="bg-blue-500/20 p-2 rounded-lg shrink-0">
                   <ChartBarIcon className="w-8 h-8 text-blue-400" />
@@ -161,12 +318,12 @@ export default function SalesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO DA OFERTA FINAL (STACK) - AJUSTADA PARA MENTORIA 1:1 */}
+      {/* SEÇÃO DA OFERTA FINAL (STACK) */}
       <section className="py-24 px-6 relative">
         <div className="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           {/* Faixa de Desconto */}
           <div className="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-6 py-2 rounded-bl-2xl">
-            93% OFF
+            90% OFF
           </div>
 
           <div className="text-center mb-10">
@@ -208,8 +365,7 @@ export default function SalesPage() {
                   <strong className="text-white">Estratégia de Escala:</strong> O plano exato para você aumentar o orçamento com segurança.
                 </span>
               </li>
-              
-              {/* O Bônus também muda para reforçar que é personalizado */}
+            
               <li className="flex items-center gap-3 text-yellow-400 font-bold bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20">
                 <VideoCameraIcon className="w-6 h-6 shrink-0" />
                 <span>BÔNUS: Reunião de 30 minutos com um especialista da nossa equipe (disponível por 7 dias, após a compra)</span>
@@ -219,14 +375,11 @@ export default function SalesPage() {
 
           <div className="text-center">
             <a 
-              href="https://pay.kiwify.com.br/Hz7fNnm"
+              href={oferta.linkCheckout}
               className="w-full block bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl text-xl shadow-lg transition-transform transform hover:-translate-y-1 mb-4"
             >
               QUERO COMPRAR AGORA
-            </a>
-            
-            {/* Se tiver a imagem de pagamentos, pode descomentar a linha abaixo */}
-            {/* <Image src="/images/payment-methods.png" alt="Métodos de Pagamento" width={300} height={50} className="mx-auto opacity-50" /> */}
+          </a>
             
             <p className="text-xs text-gray-500 mt-4">
               Garantia de 7 dias. Se não sentir que valeu a pena, devolvo seu dinheiro.
@@ -236,5 +389,4 @@ export default function SalesPage() {
       </section>
     </div>
   );
-}
-
+  }
