@@ -14,7 +14,7 @@ import {
 // --- DADOS DA OFERTA ---
 const oferta = {
   precoDe: "970,00",
-  precoPor: "97,00",
+  precoPor: "67,00",
   linkCheckout: "https://pay.kiwify.com.br/Hz7fNnm" 
 };
 
@@ -26,13 +26,7 @@ const modulos = [
   { numero: "05", titulo: "Escala e Fases", desc: "A hora de transformar R$ 100 em R$ 500 com segurança e previsibilidade." },
 ];
 
-const bonus = [
-  { nome: "Acesso Vitalício", valor: "R$ 97,00", status: "Oferta no Carrinho" },
-  { nome: "Planilha Secreta de Públicos", valor: "R$ 47,00", status: "Oferta no Carrinho" },
-  { nome: "Sessão Tira-Dúvidas (Gravação)", valor: "R$ 197,00", status: "Incluso Hoje" },
-];
-
-// --- LISTA DE DEPOIMENTOS (MOVIDO PARA O LUGAR CERTO) ---
+// --- LISTA DE DEPOIMENTOS ---
 const depoimentos = [
   // VÍDEOS
   { 
@@ -85,11 +79,10 @@ const depoimentos = [
     tipo: 'texto', 
     imagemUrl: '/images/flamaunique.png'
   },
-
   { 
     nome: 'Maria José', 
     cargo: 'Coach', 
-    texto: 'Fantástico o seu método e paciência em explicar. Simples e direto!', 
+    texto: 'Fantastico o seu método e paciência em explicar. Simples e direto!', 
     tipo: 'texto', 
     imagemUrl: '/images/renova.png'
   },
@@ -102,17 +95,26 @@ const depoimentos = [
   }
 ];
 
-
 export default function SalesPage() {
   const [mostrarDepoimentos, setMostrarDepoimentos] = useState(false);
-  
-  // --- FUNÇÃO NOVA PARA RASTREAR O CLIQUE ---
-  const handleCheckout = () => {
-    // Verifica se o Pixel está carregado e dispara o evento
+
+  // --- FUNÇÃO CORRIGIDA PARA RASTREAR O CLIQUE ---
+  const handleCheckout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    // 1. Impede a navegação imediata
+    e.preventDefault();
+
+    // 2. Dispara o evento do Facebook se o pixel estiver carregado
     if (typeof window !== "undefined" && (window as any).fbq) {
       (window as any).fbq('track', 'InitiateCheckout');
+      console.log("Evento InitiateCheckout disparado!");
     }
+
+    // 3. Aguarda 300ms para o evento sair e então navega
+    setTimeout(() => {
+      window.location.href = oferta.linkCheckout;
+    }, 300);
   };
+
   return (
     <div className="bg-gray-950 min-h-screen text-white font-sans selection:bg-green-500 selection:text-white">
       
@@ -123,7 +125,6 @@ export default function SalesPage() {
 
       {/* HERO SECTION - A PROMESSA */}
       <section className="relative pt-12 pb-20 px-6 sm:px-10 flex flex-col items-center text-center overflow-hidden">
-        {/* Background glow effect */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-blue-600/20 blur-[120px] rounded-full -z-10"></div>
 
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-400 text-sm font-semibold mb-8">
@@ -140,26 +141,26 @@ export default function SalesPage() {
         </p>
 
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-           <span>No vídeo abaixo, eu detalho o método que vamos aplicar, cobrindo desde a configuração da sua conta até a otimização e escala das suas campanhas. </span>
+            <span>No vídeo abaixo, eu detalho o método que vamos aplicar, cobrindo desde a configuração da sua conta até a otimização e escala das suas campanhas. </span>
         </div>
 
         {/* VSL / VÍDEO DE VENDAS */}
-       <div className="w-full max-w-4xl aspect-video bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 relative group overflow-hidden mb-12">
-            <iframe 
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/5X1TDEdmVGg?rel=0&modestbranding=1" 
-                title="Vídeo de Vendas"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-            ></iframe>
+        <div className="w-full max-w-4xl aspect-video bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 relative group overflow-hidden mb-12">
+             <iframe 
+                 className="w-full h-full"
+                 src="https://www.youtube.com/embed/5X1TDEdmVGg?rel=0&modestbranding=1" 
+                 title="Vídeo de Vendas"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                 allowFullScreen
+             ></iframe>
         </div>
 
-        {/* CTA PRINCIPAL */}
+        {/* CTA PRINCIPAL COM TRACKING */}
         <div className="flex flex-col items-center gap-4 animate-bounce-slow">
           <a 
-            href={oferta.linkCheckout}
-            onClick={handleCheckout} 
-            className="bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 text-white font-bold py-5 px-12 rounded-xl text-xl sm:text-2xl shadow-lg shadow-green-500/30 transition-all transform hover:scale-105 flex items-center gap-3 border-b-4 border-green-900"
+            href={oferta.linkCheckout} 
+            onClick={handleCheckout}
+            className="bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 text-white font-bold py-5 px-12 rounded-xl text-xl sm:text-2xl shadow-lg shadow-green-500/30 transition-all transform hover:scale-105 flex items-center gap-3 border-b-4 border-green-900 cursor-pointer"
           >
             <span>QUERO VENDER TODOS OS DIAS</span>
             <ArrowRightIcon className="w-6 h-6" />
@@ -181,12 +182,9 @@ export default function SalesPage() {
           <div className="flex flex-wrap justify-center gap-6">
             {modulos.map((mod, i) => (
               <div key={i} className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] bg-gray-950 p-8 rounded-2xl border border-gray-800 hover:border-yellow-500/50 hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
-                
-                {/* Número Gigante de Fundo */}
                 <span className="absolute -right-4 -top-4 text-8xl font-bold text-gray-800/20 group-hover:text-yellow-900/20 transition-colors select-none">
                   {mod.numero}
                 </span>
-
                 <div className="relative z-10">
                   <div className="text-yellow-500 font-bold text-sm mb-2 tracking-wider uppercase">
                     Passo {mod.numero}
@@ -202,22 +200,20 @@ export default function SalesPage() {
         </div>
       </section>
 
-{/* SEÇÃO DE PROVA SOCIAL (DEPOIMENTOS) */}
+      {/* SEÇÃO DE PROVA SOCIAL (DEPOIMENTOS) */}
       <section className="py-20 bg-gray-950 relative overflow-hidden">
-        {/* Decoração de fundo */}
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Eles aplicaram e tiveram <span className="text-yellow-400">Resultados</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reais</span>
+              Eles aplicaram e tiveram <span className="text-yellow-400">Resultados Reais</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Não acredite apenas na minha palavra. Veja o que quem já passou pela mentoria tem a dizer.
             </p>
           </div>
 
-          {/* GRID DE VÍDEOS (SEMPRE VISÍVEL) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {depoimentos.filter(d => d.tipo === 'video').map((depo, i) => (
               <div key={i} className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 shadow-lg hover:border-yellow-500/30 transition-all">
@@ -242,7 +238,6 @@ export default function SalesPage() {
             ))}
           </div>
 
-          {/* BOTÃO VEJA MAIS (SÓ APARECE SE AINDA NÃO CLICOU) */}
           {!mostrarDepoimentos && (
             <div className="text-center mt-8">
               <button 
@@ -255,7 +250,6 @@ export default function SalesPage() {
             </div>
           )}
 
-          {/* GRID DE TEXTOS (SÓ APARECE DEPOIS DE CLICAR) */}
           {mostrarDepoimentos && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-4 duration-700">
               {depoimentos.filter(d => d.tipo === 'texto').map((depo, i) => (
@@ -290,7 +284,6 @@ export default function SalesPage() {
 
       {/* SEÇÃO ORDER BUMP */}
       <section className="py-20 bg-gradient-to-b from-gray-950 to-blue-950/20 relative overflow-hidden">
-        {/* Elemento decorativo */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 blur-[80px] rounded-full"></div>
 
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -300,53 +293,45 @@ export default function SalesPage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-            {/* Simulando Visual do Order Bump 1 */}
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-dashed border-green-500/50 flex items-start gap-4">
                <div className="bg-green-500/20 p-2 rounded-lg shrink-0">
                   <VideoCameraIcon className="w-8 h-8 text-green-400" />
                </div>
                <div>
-                 <h4 className="font-bold text-lg text-green-400">Aula Personalizada</h4>
-                 <p className="text-gray-300 text-sm mt-1">Aula particular de tráfego pago (1:1) com gravação e ata com todos os dados da reunião para revisar.</p>
-                 <span className="inline-block mt-3 text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">Disponível no carrinho</span>
+                  <h4 className="font-bold text-lg text-green-400">Aula Personalizada</h4>
+                  <p className="text-gray-300 text-sm mt-1">Aula particular de tráfego pago (1:1) com gravação e ata com todos os dados da reunião para revisar.</p>
+                  <span className="inline-block mt-3 text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">Disponível no carrinho</span>
                </div>
             </div>
 
-            {/* Simulando Visual do Order Bump 2 */}
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-dashed border-blue-500/50 flex items-start gap-4">
                <div className="bg-blue-500/20 p-2 rounded-lg shrink-0">
                   <ChartBarIcon className="w-8 h-8 text-blue-400" />
                </div>
                <div>
-                 <h4 className="font-bold text-lg text-blue-400">Planilha de Públicos Validados</h4>
-                 <p className="text-gray-300 text-sm mt-1">Pare de chutar público. Use a minha base de dados validada para nichos variados.</p>
-                 <span className="inline-block mt-3 text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded">Disponível no carrinho</span>
+                  <h4 className="font-bold text-lg text-blue-400">Planilha de Públicos Validados</h4>
+                  <p className="text-gray-300 text-sm mt-1">Pare de chutar público. Use a minha base de dados validada para nichos variados.</p>
+                  <span className="inline-block mt-3 text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded">Disponível no carrinho</span>
                </div>
             </div>
           </div>
         </div>
       </section>
 
-
-  {/* SEÇÃO DA OFERTA FINAL (STACK) */}
+      {/* SEÇÃO DA OFERTA FINAL (STACK) COM TRACKING */}
       <section className="py-24 px-6 relative">
         <div className="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
-          {/* Faixa de Desconto */}
           <div className="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-6 py-2 rounded-bl-2xl z-20">
-            96% OFF
+            90% OFF
           </div>
 
-          {/* Header da Oferta com espaçamento corrigido no mobile (pt-8) */}
           <div className="text-center mb-10 pt-8 sm:pt-0 relative z-10">
             <h3 className="text-2xl text-yellow-400 font-medium mb-4 sm:mb-2">Aula gravada (06/12/2025)</h3>
             
-            {/* Bloco de Preço: Flex Column no mobile, Row no desktop */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3">
-              {/* Preço Antigo (menor no mobile) */}
               <span className="text-xl sm:text-2xl text-red-500 line-through font-medium">
                 R$ 970,00
               </span>
-              {/* Preço Novo (Gigante no mobile para destaque) */}
               <span className="text-7xl sm:text-6xl font-extrabold text-white">
                 R$ 67,00
               </span>
@@ -397,7 +382,7 @@ export default function SalesPage() {
             <a 
               href={oferta.linkCheckout}
               onClick={handleCheckout}
-              className="w-full block bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl text-xl shadow-lg transition-transform transform hover:-translate-y-1 mb-4"
+              className="w-full block bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl text-xl shadow-lg transition-transform transform hover:-translate-y-1 mb-4 cursor-pointer"
             >
               QUERO COMPRAR AGORA
             </a>
