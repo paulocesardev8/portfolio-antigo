@@ -105,6 +105,14 @@ const depoimentos = [
 
 export default function SalesPage() {
   const [mostrarDepoimentos, setMostrarDepoimentos] = useState(false);
+  
+  // --- FUNÇÃO NOVA PARA RASTREAR O CLIQUE ---
+  const handleCheckout = () => {
+    // Verifica se o Pixel está carregado e dispara o evento
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout');
+    }
+  };
   return (
     <div className="bg-gray-950 min-h-screen text-white font-sans selection:bg-green-500 selection:text-white">
       
@@ -149,7 +157,8 @@ export default function SalesPage() {
         {/* CTA PRINCIPAL */}
         <div className="flex flex-col items-center gap-4 animate-bounce-slow">
           <a 
-            href={oferta.linkCheckout} 
+            href={oferta.linkCheckout}
+            onClick={handleCheckout} 
             className="bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 text-white font-bold py-5 px-12 rounded-xl text-xl sm:text-2xl shadow-lg shadow-green-500/30 transition-all transform hover:scale-105 flex items-center gap-3 border-b-4 border-green-900"
           >
             <span>QUERO VENDER TODOS OS DIAS</span>
@@ -387,6 +396,7 @@ export default function SalesPage() {
           <div className="text-center">
             <a 
               href={oferta.linkCheckout}
+              onClick={handleCheckout}
               className="w-full block bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl text-xl shadow-lg transition-transform transform hover:-translate-y-1 mb-4"
             >
               QUERO COMPRAR AGORA
