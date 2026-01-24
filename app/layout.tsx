@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// Importações novas e limpas:
 import { GoogleAnalytics } from '@next/third-parties/google';
-import FacebookPixel from "@/components/FacebookPixel"; 
+
+// IMPORTAÇÃO NOVA (Sem chaves, nome novo):
+import PixelFacebook from "@/components/PixelFacebook";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,14 +28,12 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-950 text-white antialiased`}>
         {children}
 
-        {/* --- RASTREAMENTO OFICIAL --- */}
-        
-        {/* 1. Google Analytics (Via Lib Oficial - Sem conflitos) */}
+        {/* --- RASTREAMENTO --- */}
         <GoogleAnalytics gaId="G-GYR5QWSWK2" />
-
-        {/* 2. Facebook Pixel (Via Componente Inteligente) */}
-        <FacebookPixel />
-
+        
+        {/* COMPONENTE NOVO: */}
+        <PixelFacebook />
+        
       </body>
     </html>
   );
