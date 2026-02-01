@@ -322,7 +322,7 @@ export default function SalesPage() {
       <section className="py-24 px-6 relative">
         <div className="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 bg-yellow-500 text-black font-bold px-6 py-2 rounded-bl-2xl z-20">
-            90% OFF
+            97% OFF
           </div>
 
           <div className="text-center mb-10 pt-8 sm:pt-0 relative z-10">
@@ -333,7 +333,7 @@ export default function SalesPage() {
                 R$ 970,00
               </span>
               <span className="text-7xl sm:text-6xl font-extrabold text-white">
-                R$ 67,00
+                R$ 27,00
               </span>
             </div>
             
