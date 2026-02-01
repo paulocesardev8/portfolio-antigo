@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // IMPORTAÇÃO NOVA (Sem chaves, nome novo):
 import PixelFacebook from "@/components/PixelFacebook";
@@ -30,6 +31,9 @@ export default function RootLayout({
 
         {/* --- RASTREAMENTO --- */}
         <GoogleAnalytics gaId="G-GYR5QWSWK2" />
+
+        {/* --- BOTÃO FLUTUANTE WHATSAPP --- */}
+        <WhatsAppButton />
         
         {/* COMPONENTE NOVO: */}
         <PixelFacebook />
