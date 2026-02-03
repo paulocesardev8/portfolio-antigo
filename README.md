@@ -1,45 +1,56 @@
-# Portfólio Pessoal (Primeira Versão)
+# Plataforma de Vendas High-Performance | Next.js & Analytics
 
-Este projeto foi desenvolvido como a primeira versão do meu portfólio profissional, utilizando tecnologias modernas do ecossistema JavaScript e Python. Mesmo tendo evoluído visualmente desde então, esta versão representa minha trajetória, aprendizado e habilidades práticas no desenvolvimento web.
+> Repositório oficial da aplicação web [Sintonia Solutions](https://sintoniasolutions.com.br).
 
-## ✨ Funcionalidades
+Este projeto não é apenas um portfólio, é uma **solução de engenharia focada em conversão**. Desenvolvido para unir a performance do **Next.js (App Router)** com a inteligência de dados de ferramentas de tráfego pago.
 
-- Layout responsivo com **Next.js** + **Tailwind CSS**
-- Animações com **AOS (Animate On Scroll)**
-- Sessão Hero com imagem, texto e botões
-- Cards animados com destaques de projetos
-- Seção de tecnologias com ícones SVG
-- Organização clara de código e componentes reutilizáveis
+O objetivo principal foi criar uma arquitetura que suporte campanhas de alta intensidade (Google Ads/Meta Ads) sem comprometer os **Core Web Vitals**.
 
-## 🧠 Tecnologias Utilizadas
+## 🚀 Diferenciais Técnicos
 
-- Next.js 15
-- React
-- Tailwind CSS
-- AOS (Animate On Scroll)
-- TypeScript
-- Flask (em projeto paralelo)
-- Git e GitHub
+- **Next.js 16 (App Router):** Utilização de *Server Components* para reduzir o bundle enviado ao cliente e melhorar o TBT (Total Blocking Time).
+- **Integração de APIs de Conversão:** Implementação *server-side* e *client-side* de eventos do GA4 e Meta Pixel, garantindo rastreamento mesmo com bloqueadores de anúncios.
+- **Otimização de SEO Técnico:** Estrutura semântica e `Metadata API` dinâmica para indexação correta nos motores de busca.
+- **Tailwind CSS:** Estilização utility-first para garantir responsividade total e baixo peso de CSS.
 
-## 📌 Motivação
+## 🛠️ Tech Stack
 
-Este portfólio foi criado com o objetivo de apresentar minha atuação como estrategista digital, especialista em tráfego pago, IA e automações inteligentes. Com ele, pude aplicar minhas habilidades técnicas e consolidar um layout funcional, ainda que posteriormente tenha optado por evoluir o visual para um formato mais moderno e centralizado.
+| Categoria | Tecnologias |
+| :--- | :--- |
+| **Core** | React.js, Next.js, TypeScript |
+| **Estilo** | Tailwind CSS, Framer Motion (Animações) |
+| **Analytics** | Google Analytics 4, GTM, Meta Pixel API |
+| **Infra** | Vercel, Git |
 
-## 📷 Prévia
+## 🧠 Desafios & Soluções
+
+### 1. Rastreamento sem Perda de Performance
+O desafio era instalar múltiplos scripts de rastreamento (Ads, Analytics, Hotjar) sem "travar" o carregamento inicial da página.
+**Solução:** Implementação de lazy loading para scripts de terceiros e priorização de recursos críticos, mantendo a pontuação do Lighthouse acima de 90.
+
+### 2. Conversão via WhatsApp
+Necessidade de medir quantos usuários realmente iniciam uma conversa, e não apenas clicam no botão.
+**Solução:** Criação de um manipulador de eventos customizado em TypeScript que dispara o evento de conversão para o GTM antes de redirecionar o usuário, garantindo a precisão dos dados de ROAS.
+
+## 📷 Preview do Projeto
 
 ![screenshot](./public/images/paulo.png)
+*(Dica: Garanta que essa imagem na pasta public seja uma captura de tela bonita e atual do site)*
 
-## 🚀 Como rodar localmente
+## 📦 Como rodar localmente
 
-```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+``` bash
+## Clone o repositório
+git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/seu-usuario/nome-do-repositorio.git)
+
+## Entre na pasta
 cd nome-do-repositorio
+
+# Instale as dependências
 npm install
-npm run dev
+
+# Rode o servidor de desenvolvimento
+npm run dev 
 ```
 
-Acesse: [http://localhost:3000](http://localhost:3000)
-
----
-
-**🧭 Observação**: Este projeto representa um estágio importante da minha evolução como desenvolvedor front-end e estrategista digital. Recomendo também visitar a [nova versão do meu portfólio](#) com visual ainda mais refinado e interativo.
+Desenvolvido por Paulo Cesar Frontend Developer & Growth Engineer [LinkedIn](https://www.linkedin.com/in/paulo-cesar-tech-mkt/) | [Portfólio](https://sintoniasolutions.com.br)
