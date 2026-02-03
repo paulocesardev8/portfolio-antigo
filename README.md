@@ -34,8 +34,10 @@ Necessidade de medir quantos usuários realmente iniciam uma conversa, e não ap
 
 ## 📷 Preview do Projeto
 
-![screenshot](./public/images/paulo.png)
-*(Dica: Garanta que essa imagem na pasta public seja uma captura de tela bonita e atual do site)*
+![screenshot](./public/images/hero.png)
+![screenshot](./public/images/beneficios.png)
+![screenshot](./public/images/oferta.png)
+![screenshot](./public/images/footer.png)
 
 ## 📦 Como rodar localmente
 
